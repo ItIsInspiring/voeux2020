@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #6cf;
+}
+
+.wCanvas {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#canvas {
+  border: 1px solid red;
+  margin: 0 auto;
+}
+/*# sourceMappingURL=styles.css.map */
