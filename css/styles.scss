@@ -1,17 +1,84 @@
+@font-face {
+  font-family: "General Station";
+  src: url("/fonts/GeneraleStation-Regular.woff2") format("woff2"),
+         url("/fonts/GeneraleStation-Regular.woff") format("woff");
+ }
+
 body{
     margin: 0;
     padding: 0;
-    background: #6cf;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.wCanvas {
+a{ color:#FF00FF; text-decoration: none;}
+
+$color3:#FFFF00;
+$color2:#FFFFDE;
+$color1:#00FFFF;
+$color4:#FF00FF;
+$color5:#0000FF;
+
+.wStage {
   position: absolute;
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
+  background: $color1;
+  background: -moz-linear-gradient(top, $color1 0%, $color2 50%, $color3 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, $color1), color-stop(50%, $color2), color-stop(100%, rgba(9,37,96,1)));
+  background: -webkit-linear-gradient(top, $color1 0%, $color2 50%, $color3 100%);
+  background: -o-linear-gradient(top, $color1 0%, $color2 50%, $color3 100%);
+  background: -ms-linear-gradient(top, $color1 0%, $color2 50%, $color3 100%);
+  background: linear-gradient(to bottom, $color1 0%, $color2 50%, $color3 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6e7f0', endColorstr='#092560', GradientType=0 );
 }
-#canvas{
-  border:1px solid red;
+
+.stage{
+  //border:1px solid pink;
   margin: 0 auto;
+  position: relative;
+}
+
+.grad1{
+  fill: url(#my-cool-gradient1) #447799;
+}
+.grad2{
+  fill: url(#my-cool-gradient2) #11219F;
+}
+.grad3{
+  fill: url(#my-cool-gradient3) #447799;
+}
+.grad4{
+  fill: url(#my-cool-gradient4) #447799;
+}
+.grad5{
+  fill: url(#my-cool-gradient5) #447799;
+}
+
+.voeux{
+  position: absolute;
+  border: 0px solid red;
+  width: 480px;
+  height: 160px;
+  position: relative;
+  top: 320px;
+  left: 160px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  p{
+    font-family:'General Station';
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+#footer{
+  position: absolute;
+  bottom: 1rem;
+  text-align: center;
+  width: 100%;
+  font-size: 0.75rem;
+
 }

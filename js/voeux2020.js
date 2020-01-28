@@ -1,74 +1,67 @@
-Plot = function ( stage ) {
 
-  this.setDimensions = function( x, y ) {
-    this.elm.style.width = x + 'px';
-    this.elm.style.height = y + 'px';
-    this.width = x;
-    this.height = y;
-  };
-  this.position = function( x, y ) {
-    var xoffset = arguments[2] ? 0 : this.width / 2;
-    var yoffset = arguments[2] ? 0 : this.height / 2;
-    this.elm.style.left = (x - xoffset) + 'px';
-    this.elm.style.top = (y - yoffset) + 'px';
-    this.x = x;
-    this.y = y;
-  };
-  this.setBackground = function( col ) {
-    this.elm.style.background = col;
-  };
-  this.kill = function() {
-    stage.removeChild( this.elm );
-  };
-  this.rotate = function( str ) {
-    this.elm.style.webkitTransform = this.elm.style.MozTransform = 
-    this.elm.style.OTransform = this.elm.style.transform = 
-    'rotate(' + str + 'deg)'; 
-  };
-  this.content = function( content ) {
-    this.elm.innerHTML = content;
-  };
-  this.round = function( round ) {
-    this.elm.style.borderRadius = round ? '50%/50%' : '';
-  };
-  this.elm = document.createElement( 'div' );
-  this.elm.style.position = 'absolute';
-  stage.appendChild( this.elm );
-};
+var g = [
+  '<g class="grad1"><rect x="12.2" y="11.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -16.4221 40.3536)" width="56.6" height="56.6"/></g>',
+  '<g class="grad2"><rect x="0" y="0" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -16.4221 40.3536)" /></g>',
+  '<g class="grad3"><rect x="12.2" y="11.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -16.4221 40.3536)" /><path d="M40.5,28.3L52.2,40L40.5,51.7L28.8,40L40.5,28.3 M40.5,0l-40,40l40,40l40-40L40.5,0L40.5,0z"/></g>',
+  '<g class="grad4"><rect x="12.2" y="11.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -16.4221 40.3536)" /><path d="M40.5,22.6L57.9,40L40.5,57.4L23.1,40L40.5,22.6 M40.5,0l-40,40l40,40l40-40L40.5,0L40.5,0z"/></g>',
+  '<g class="grad5"><polygon points="40,80 80,40 40,0 "/><polygon points="40,80 80,40 40,0 "/></g>'
+];
 
+
+
+/** DEFINITION DU STAGE */
 var stage = document.querySelector('.stage'),
-    plots = 10,
-    increase = Math.PI * 2 / plots,
+
+    nbClips = 10,
+    increase = Math.PI * 2 / nbClips,
     angle = 0,
     x = 0,
     y = 0,
     startX=50, 
     startY=50,
-    plotcache = [];
+    clipsCache = [];
+    dim = 80;
+
+  /* controler la largeur du stage */
+    stage.style.width = dim*nbClips + 'px';
+    stage.style.height = dim*nbClips + 'px';
+    // stage.style.width = 80+'%';
+    // stage.style.height = 80+'%';
+
     
-  for( var j = 0; j < plots; j++ ) {
-    for( var i = 0; i < plots; i++ ) {
-  var p = new Plot( stage );
-  p.size=40;
-  p.setBackground( 'pink' );
-  p.setDimensions( p.size, p.size );
-  p.position( 50*i+startX, 50*j+ startY );
-  p.rotate('45');
-  plotcache.push( p );
-  console.log(plotcache[i]);
-}
-}
+  for( var j = 0; j < nbClips; j++ ) {
+      for( var i = 0; i < nbClips; i++ ) {
+        var p = new Clip( stage );
+        p.setDimensions( dim, dim);
+        p.setClass("clip-"+i+'-'+j);
+        p.position( dim*i , dim*j );
+        //console.log("clip-"+i+'-'+j);
+
+        /* choisir entre 0 et 4 */
+        function getRandomInt(max) {
+          return (Math.floor(Math.random() * Math.floor(max)));
+        }
+        indexClip = getRandomInt(6);
+        p.svg(g[indexClip]);
+        clipsCache.push( p );
+
+        /* suppression des clips pour le texte central*/
+        supClips = [];
+        if(j == 4 || j == 5){
+          if(i <= 7 && i >= 2){
+            p.kill();
+          }
+        }
 
 
-function rotate(){
-  for( var i = 0; i < plots; i++ ) {
-    x = 100 * Math.cos( angle ) + 200;
-    y = 100 * Math.sin( angle ) + 200;
-    plotcache[ i ].rotate( Math.atan2( y - 200, x - 200 ) + 'rad' );
-    plotcache[ i ].position( x, y );
-    angle += increase;
-  }
-  angle += 0.06;
-}
+        
+      }
+    }
 
-//setInterval( rotate, 1000 / 30 );
+    var texte = document.createElement( 'div' );
+    texte.className = 'voeux';
+
+    stage.appendChild(texte);
+    texte.innerHTML = '<p><a href="/">Bonne année<br/>2020</a></p>';
+
+
