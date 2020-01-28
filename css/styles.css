@@ -1,6 +1,6 @@
 @font-face {
   font-family: "General Station";
-  src: url("/fonts/GeneraleStation-Regular.woff2") format("woff2"), url("/fonts/GeneraleStation-Regular.woff") format("woff");
+  src: url("../fonts/GeneraleStation-Regular.woff2") format("woff2"), url("../fonts/GeneraleStation-Regular.woff") format("woff");
 }
 
 body {

@@ -62,6 +62,6 @@ var stage = document.querySelector('.stage'),
     texte.className = 'voeux';
 
     stage.appendChild(texte);
-    texte.innerHTML = '<p><a href="/">Bonne année<br/>2020</a></p>';
+    texte.innerHTML = '<p><a href="index.html">Bonne année<br/>2020</a></p>';
 
 
